@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Person from './Person';
+import NewPersonForm from './NewPersonForm';
+import PersonList from './PersonList';
 import '../styles/App.css';
 
 class App extends Component {
+
+  state = { people: [] }
+
+  handleNewPerson = person => {
+    this.setState({
+      people: [...this.state.people, person]
+    });
+  }
+
   render() {
     return (
-      <div className="App">
+      <main className="App">
         <Header title="Famous People" />
-        <Person />
-      </div>
+
+        <NewPersonForm 
+          submit={this.handleNewPerson}
+        />
+
+        <PersonList people={this.state.people} />
+
+      </main>
     );
   }
 }
