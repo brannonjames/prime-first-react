@@ -6,14 +6,19 @@ class Person extends Component {
     this.state = {
       person: {
         name: '',
-        role: ''
+        role: '',
+        popularity: ''
       }
     }
   }
 
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ person: { [name]: value }  });
+  handleChange = name => event => {
+    this.setState({ person: { ...this.state.person, [name]: event.target.value } });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log(this.state.person);
   }
 
   render(){
@@ -21,21 +26,28 @@ class Person extends Component {
     return (
       <div>
         <h1>{ person.name } is famous for { person.role }</h1>
-        <input 
-          name="name"
-          placeholder="Name"
-          onChange={this.handleChange}
-        />
-        <input 
-          name="role"
-          placeholder="Role"
-          onChange={this.handleChange}
-        />
-        <button
-          onClick={() => console.log(this.state.name)}
-        >
-          Log Person
-        </button>
+        <h2>Popularity: { person.popularity }</h2>
+        <form onSubmit={this.handleSubmit}>
+          <input 
+            name="name"
+            placeholder="Name"
+            onChange={this.handleChange('name')}
+          />
+          <input 
+            name="role"
+            placeholder="Role"
+            onChange={this.handleChange('role')}
+          />
+          <input 
+            placeholder="Popularity"
+            onChange={this.handleChange('popularity')}
+          />
+          <button
+            onClick={() => console.log(this.state.name)}
+          >
+            Log Person
+          </button>
+        </form>
       </div>
     )
   }
