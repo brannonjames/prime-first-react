@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import NewPersonForm from './NewPersonForm';
 import PersonList from './PersonList';
+import PlanetList from './PlanetList';
 import '../styles/App.css';
 
 class App extends Component {
@@ -24,6 +25,8 @@ class App extends Component {
         />
 
         <PersonList people={this.state.people} />
+
+        <PlanetList />
 
       </main>
     );
